@@ -1,10 +1,11 @@
 import VerticalLayout from './VerticalLayout.js'
 import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
-
+import { formatDate } from "../app/format.js"
 import Actions from './Actions.js'
 
-const row = (bill) => {
+
+let row = (bill) => {
   return (`
     <tr>
       <td>${bill.type}</td>
@@ -19,14 +20,34 @@ const row = (bill) => {
     `)
   }
 
-const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
-}
+  const rows = (data) => {
+    
+    //sous jest
+    /*if(typeof jest !== 'undefined'){*/
+      return (data && data.length) ? data.sort((a, b) => ((a.date < b.date) ? 1 : -1)).map(bill => row(bill)).join(""): ""
+    //}
+    //en prod
+    /*else{
+      const sortedDataByDate = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const cleanData = []
+      for(let i = 0 ; i < sortedDataByDate.length ; i++){
+        cleanData.push(formatDate(sortedDataByDate[i].date))
+      }
+      for(let k = 0 ; k < cleanData.length ; k++){
+        sortedDataByDate[k].date = cleanData[k]
+      }
+      return sortedDataByDate.map((bill) => row(bill)).join("");
+    }*/
+    
+      
+    
+  };
+  
 
 export default ({ data: bills, loading, error }) => {
   
   const modal = () => (`
-    <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" data-testid="modaleFileEmployee" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
