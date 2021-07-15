@@ -64,8 +64,8 @@ describe("Given I am connected as an employee", () => {
 	})
   })
   // test click on new bill button
-  describe('When I click on the Create a new bill button', () => {
-		test('Then sent to the NewBill page', () => {
+  describe('When I click on the new bill button', () => {
+		test('Then open NewBill page', () => {
 			const html = BillsUI({ data: [] })
 			document.body.innerHTML = html
 			//simulation route constants/routes.js
@@ -85,7 +85,6 @@ describe("Given I am connected as an employee", () => {
 	// test click on eye button
 	describe('When I click on the Eye Icon button', () => {
 		test('Then a modal should open',  () => {
-			
 			const html = BillsUI({ data: bills })
 			document.body.innerHTML = html
 			//simulation route constants/routes.js
@@ -95,9 +94,7 @@ describe("Given I am connected as an employee", () => {
 			//création note de frais containers/Bills.js
 			const bill = new Bills({ document, onNavigate, firestore: null, localStorage: window.localStorage, })
 			//simulation création fenêtre modale
-			const modale = screen.getByTestId('modaleFileEmployee')
 			$.fn.modal = jest.fn()
-			
 			//vérification de l'appel de l'ouverture de la modale
 			const button = screen.getAllByTestId('icon-eye')[0]
 			const clickIconEye = jest.fn((e) => {
@@ -107,7 +104,6 @@ describe("Given I am connected as an employee", () => {
 			button.addEventListener('click', clickIconEye)
 			fireEvent.click(button)
 			expect(clickIconEye).toHaveBeenCalled()
-			
 		})
 	})
 })

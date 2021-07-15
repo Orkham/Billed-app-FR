@@ -16,7 +16,6 @@ export const filteredBills = (data, status) => {
         selectCondition = (bill.status === status)
       } else {
         // in prod environment
-        
         const userEmail = JSON.parse(localStorage.getItem("user")).email
         selectCondition =
           (bill.status === status) &&
