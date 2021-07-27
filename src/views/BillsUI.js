@@ -23,12 +23,12 @@ let row = (bill) => {
   const rows = (data) => {
     
     //sous jest
-    /*if(typeof jest !== 'undefined'){*/
+    if(typeof jest !== 'undefined'){
 
-      //return (data && data.length) ? data.sort((a, b) => ((a.date < b.date) ? 1 : -1)).map(bill => row(bill)).join(""): ""
-    //}
+      return (data && data.length) ? data.sort((a, b) => ((a.date < b.date) ? 1 : -1)).map(bill => row(bill)).join(""): ""
+    }
     //en prod
-    /*else{
+    else{
       const sortedDataByDate = data.sort((a, b) => new Date(b.date) - new Date(a.date));
       const cleanData = []
       for(let i = 0 ; i < sortedDataByDate.length ; i++){
@@ -38,17 +38,18 @@ let row = (bill) => {
         sortedDataByDate[k].date = cleanData[k]
       }
       return sortedDataByDate.map((bill) => row(bill)).join("");
-    }*/
+    }
     // convert strings to dates : new Date(b.date) - new Date(a.date)
-    let dataSorted
+    //let dataSorted
     // in jest environment
+    /*
     if (typeof jest !== 'undefined') {
       dataSorted = (data && data.length) ? data.sort((a, b) => new Date(b.date) - new Date(a.date)) : ""
     } else {
       dataSorted = (data && data.length) ? data.sort((a, b) => new Date(b.digitDate) - new Date(a.digitDate)) : ""
     }
     return (data && data.length) ? dataSorted.map(bill => row(bill)).join("") : ""
-      
+      */
     
   };
   

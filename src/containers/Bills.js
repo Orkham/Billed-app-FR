@@ -41,9 +41,9 @@ export default class {
             try {
               return {
                 ...doc.data(),
-                date: formatDate(doc.data().date),
+                //date: formatDate(doc.data().date),
                 status: formatStatus(doc.data().status),
-                digitDate: doc.data().date
+                //digitDate: doc.data().date
               }
             } catch(e) {
               // if for some reason, corrupted data was introduced, we manage here failing formatDate function
